@@ -1,0 +1,13 @@
+lampu depan hidup
+lampu depan mati
+lampu dalam hidup
+lampu dalam mati
+
+buka pintu depan
+tutup pintu depan
+buka pintu depan
+tutup pintu samping
+
+ada tamu        => pintu depan buka
+saatnya tidur   => semua pintu nutup, lampu depan nyala
+cuaca panas     => semua pintu buka, semua lampu mati
