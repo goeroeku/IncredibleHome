@@ -36,9 +36,7 @@ public class HTTPAsyncPWM extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... data) {
-        //String url = "https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control";
         String url = data[0];
-        String message;
         JSONObject jsonControl = new JSONObject();
         JSONObject jsonData = new JSONObject();
         try {
@@ -75,8 +73,8 @@ public class HTTPAsyncPWM extends AsyncTask<String, Void, String> {
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(streamReader);
-                String response = null;
-                while ((response = bufferedReader.readLine()) != null) {
+                String response;
+                while ((response = bufferedReader.readLine()).equals("")) {
                     stringBuilder.append(response + "\n");
                 }
                 bufferedReader.close();

@@ -9,6 +9,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "TOKEN_API", "\"MzQwNzg5ODIyOC40ODgxMTM6\""
+        /*
+        * URL_API
+        *   Masukkan alamat URL API Arkana, pastikan dibagian akhir tanpa slash
+        *   contoh : http://arkana.com/device/IO
+        * DEVICE_IC
+        *   Masukkan nama device yang terdaftar di arkana
+        *   contoh : lampuku
+        * */
+        buildConfigField "String", "URL_API", "\"xxxxxx\""
+        buildConfigField "String", "DEVICE_IC", "\"xxxxx\""
     }
     buildTypes {
         release {

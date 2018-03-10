@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static ic.lab.incrediblehome.BuildConfig.TOKEN_API;
+
 /**
  * Created by aic on 26/09/17.
  */
@@ -63,7 +65,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestProperty("authorization", "Bearer MzQwNzg5ODIyOC40ODgxMTM6");
+            conn.setRequestProperty("authorization", "Bearer " + TOKEN_API);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             // Starts the query

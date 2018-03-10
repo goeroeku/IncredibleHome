@@ -17,8 +17,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static ic.lab.incrediblehome.BuildConfig.DEVICE_IC;
+import static ic.lab.incrediblehome.BuildConfig.URL_API;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView ivAula = null, ivLampuDepanKiri = null, ivLampuDepanKanan = null;
+
+    private String mURL = URL_API + "/" + DEVICE_IC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResult(JSONObject object) {
                 getStatus(object);
             }
-        }).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/data");
+        }).execute( mURL + "/gpio/data");
     }
 
     public void getStatus(JSONObject object) {
@@ -96,33 +101,33 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(this, result.get(0), Toast.LENGTH_LONG).show();
                     String suara = result.get(0).toString().toLowerCase().trim();
                     if (suara.contains("lampu depan hidup")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "0");
+                        new HTTPAsyncGPIO(this).execute( mURL + "/gpio/control", "5", "0");
                     } else if (suara.contains("lampu depan mati")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "1");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "5", "1");
                     } else if (suara.contains("lampu dalam hidup")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "0");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "4", "0");
                     } else if (suara.contains("lampu dalam mati")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "1");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "4", "1");
                     } else if (suara.contains("buka pintu depan")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "5");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "5");
                     } else if (suara.contains("tutup pintu depan")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "10");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "10");
                     } else if (suara.contains("buka pintu samping")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "5");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "5");
                     } else if (suara.contains("tutup pintu samping")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "10");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "10");
                     } else if (suara.contains("saatnya tidur")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "10");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "10");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "0");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "1");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "10");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "10");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "5", "0");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "4", "1");
                     } else if (suara.contains("ada tamu")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "5");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "5");
                     } else if (suara.contains("cuaca panas")) {
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "5");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "5");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "1");
-                        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "1");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "5");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "5");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "5", "1");
+                        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", "4", "1");
                     } else {
                         Toast.makeText(getBaseContext(), "Perintah " + suara + " tidak dikenali", Toast.LENGTH_LONG).show();
                     }
@@ -132,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setLampu(String pin, String status) {
-        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", pin, status);
+        new HTTPAsyncGPIO(this).execute(mURL + "/gpio/control", pin, status);
         if (pin.equals("4") && status.equals("0")) {
             ivAula.setImageResource(R.drawable.telkom_white_open);
         } else if (pin.equals("4") && status.equals("1")) {
@@ -161,38 +166,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void lampuDepanOn(View v) {
-        //new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "0");
         setLampu("5", "0");
     }
 
     protected void lampuDepanOff(View v) {
-        //new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "5", "1");
         setLampu("5", "1");
     }
 
     protected void lampuDalamOn(View v) {
-        //new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "0");
         setLampu("4", "0");
     }
 
     protected void lampuDalamOff(View v) {
-        //new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control", "4", "1");
         setLampu("4", "1");
     }
 
     protected void pintuDepanOn(View v) {
-        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "5"); //pin d5 = 14, 5 posisi sudut 45 - bukak
+        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "5"); //pin d5 = 14, 5 posisi sudut 45 - bukak
     }
 
     protected void pintuDepanOff(View v) {
-        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "14", "10"); //pin d5 = 14, 10 posisi sudut 180 - nutup
+        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "14", "10"); //pin d5 = 14, 10 posisi sudut 180 - nutup
     }
 
     protected void pintuSampingOn(View v) {
-        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "5"); //pin d6 = 12
+        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "5"); //pin d6 = 12
     }
 
     protected void pintuSampingOff(View v) {
-        new HTTPAsyncGPIO(this).execute("https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/pwm/control", "12", "10");
+        new HTTPAsyncGPIO(this).execute(mURL + "/pwm/control", "12", "10");
     }
 }

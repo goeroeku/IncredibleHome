@@ -14,6 +14,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static ic.lab.incrediblehome.BuildConfig.TOKEN_API;
+
 /**
  * Created by aic on 10/02/18.
  */
@@ -36,9 +38,7 @@ public class HTTPAsyncGPIO extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... data) {
-        //String url = "https://api.arkademy.com:8443/v0/arkana/device/IO/aioti/gpio/control";
         String url = data[0];
-        String message;
         JSONObject jsonControl = new JSONObject();
         JSONObject jsonData = new JSONObject();
         try {
@@ -65,7 +65,7 @@ public class HTTPAsyncGPIO extends AsyncTask<String, Void, String> {
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("content-type", "application/json");
-            connection.setRequestProperty("authorization", "Bearer MzQwNzg5ODIyOC40ODgxMTM6");
+            connection.setRequestProperty("authorization", "Bearer " + TOKEN_API);
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
             streamWriter.write(json.toString());
             streamWriter.flush();
@@ -73,8 +73,8 @@ public class HTTPAsyncGPIO extends AsyncTask<String, Void, String> {
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(streamReader);
-                String response = null;
-                while ((response = bufferedReader.readLine()) != null) {
+                String response;
+                while ((response = bufferedReader.readLine()).equals("")) {
                     stringBuilder.append(response + "\n");
                 }
                 bufferedReader.close();
