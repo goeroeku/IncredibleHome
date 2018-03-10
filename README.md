@@ -10,7 +10,7 @@ Note:
 - Untuk implementasi code ini membutuhkan URL_API, DEVICE_ID, dan TOKEN dari [arkademy.com](https://arkademy.com)
 - Jika belum memperoleh silakan daftar dulu di [arkademy.com](https://arkademy.com)
 - Jika sudah, buka file build.gradle pada direktori <project>/app/
-- Kemudian edit xxxxxx pada bagian bagian :
+- Kemudian edit xxxxxx pada bagian :
   ```
   buildConfigField "String", "URL_API", "\"xxxxxx\""
   buildConfigField "String", "DEVICE_IC", "\"xxxxx\""
