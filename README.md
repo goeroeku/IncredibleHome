@@ -1,5 +1,5 @@
-### IncredibleHome
-Aplikasi IoT untuk memanage lampu dan pintu rumah dengan memanfaatkan platform arkademy.com
+# IncredibleHome
+### Aplikasi IoT untuk memanage lampu dan pintu rumah dengan memanfaatkan platform arkademy.com
 --
 Feature:
 - Menyalakan dan mematikan lampu (support 2 lokasi lampu)
